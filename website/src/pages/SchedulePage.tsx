@@ -817,12 +817,12 @@ export default function SchedulePage() {
                     schedule/timezone pair in the next column. The agent's model
                     is tooltip-only: at this width it truncated to noise, and the
                     detail dialog shows it in full. */}
-                <TableCell className="truncate" title={j.script ? j.script : j.command ? j.command : `${j.agent || 'default'}${j.model ? ` · ${j.model}` : ''}`}>
+                <TableCell className="truncate" title={j.script ? j.script : j.command ? j.command : `${j.agent || defaultAgent || 'default'}${j.model ? ` · ${j.model}` : ''}`}>
                   {j.script ? <span className="font-medium text-[var(--accent)]">{i18nT('pages.schedulePage.script_python')}</span>
                     : j.command ? <span className="font-medium text-[var(--warn)]">{i18nT('pages.schedulePage.command_shell')}</span>
                     : <>
                         <span className="text-muted">{i18nT('pages.schedulePage.agent')}</span>
-                        <span className="block truncate text-[11px] text-muted">{j.agent || 'default'}</span>
+                        <span className="block truncate text-[11px] text-muted">{j.agent || defaultAgent || 'default'}</span>
                       </>}
                 </TableCell>
                 <TableCell className="truncate" title={j.schedule}><code>{j.schedule}</code>{j.timezone && <span className="block truncate text-[11px] text-muted">{j.timezone.replace(/_/g, ' ')}</span>}</TableCell>
