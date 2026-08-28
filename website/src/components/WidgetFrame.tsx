@@ -226,7 +226,7 @@ export default function WidgetFrame({ html, title = 'Widget', slug, messageTs, w
   // See hooks/useSandboxDoc.ts: the frame loads a gateway-served document
   // rather than a `blob:` URL, and the previous document survives both an
   // in-flight and a failed re-mint.
-  const { url: blobUrl, failed: mintFailed, retry: retryMint } = useSandboxDoc(
+  const { url: blobUrl, failed: mintFailed, pending: mintPending, retry: retryMint } = useSandboxDoc(
     visible ? srcdoc : null,
   )
   // Fade the iframe in once its document loads, so the reveal is a soft fade
@@ -568,7 +568,8 @@ export default function WidgetFrame({ html, title = 'Widget', slug, messageTs, w
         <span>{i18nT('components.widgetFrame.could_not_render')}</span>
         <button
           type="button"
-          className="btn btn-sm"
+          className="btn btn-sm disabled:opacity-30 disabled:cursor-not-allowed"
+          disabled={mintPending}
           onClick={retryMint}
         >
           <RotateCw className="lucide-inline" />
